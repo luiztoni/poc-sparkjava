@@ -1,0 +1,37 @@
+version: '3.7'
+services:
+  pgsql:
+    image: docker.io/postgres:latest
+    container_name: pgsql
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=pgroot
+      - POSTGRES_DB=pgdb
+    volumes:
+      - /docker/volumes/pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - cg_network
+    restart: on-failure
+  app:
+    image: docker.io/luiztoni/ciriguela:latest
+    build:
+      context: .
+    container_name: ciriguela
+    depends_on:
+      - pgsql
+    environment:
+      PG_HOST: pgsql
+      PG_USER: "postgres"
+      PG_PWD: "pgroot"
+      PG_PORT: 5432
+      PG_DB: pgdb
+    networks:
+      - cg_network
+    ports:
+      - "8080:8080"
+
+networks:
+  cg_network:
+    driver: bridge

@@ -1,5 +1,5 @@
 [Unit]
-Description=My Java driven simple service
+Description=Java simple service
 After=syslog.target network.target
 
 [Service]
@@ -12,7 +12,7 @@ Type=simple
 
 Environment="JAVA_HOME=/path/to/jvmdir"
 WorkingDirectory=/path/to/app/workdir
-ExecStart=${JAVA_HOME}/bin/java -jar javaapp.jar
+ExecStart=${JAVA_HOME}/bin/java -jar app.jar
 ExecStop=/bin/kill -15 $MAINPID
 
 [Install]

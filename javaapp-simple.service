@@ -1,18 +1,16 @@
 [Unit]
-Description=Java simple service
+Description=Java App Service
 After=syslog.target network.target
 
 [Service]
 SuccessExitStatus=143
 
-User=appuser
-Group=appgroup
+User=ubuntu
 
 Type=simple
 
-Environment="JAVA_HOME=/path/to/jvmdir"
-WorkingDirectory=/path/to/app/workdir
-ExecStart=${JAVA_HOME}/bin/java -jar app.jar
+WorkingDirectory=/home/ubuntu
+ExecStart=java -jar app.jar
 ExecStop=/bin/kill -15 $MAINPID
 
 [Install]

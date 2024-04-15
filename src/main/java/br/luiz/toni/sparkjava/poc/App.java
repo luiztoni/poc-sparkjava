@@ -13,7 +13,7 @@ public class App {
 
     public static void main(String... args) {
 
-        port(8083);
+        port(8080);
 
         CorsFilter.apply();
 
